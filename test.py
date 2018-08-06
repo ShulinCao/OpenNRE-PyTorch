@@ -8,6 +8,19 @@ import json
 from sklearn.metrics import average_precision_score
 import sys
 import os
+
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--model_name', type=str, default='pcnn_att', help='name of the model')
+args = parser.parse_args()
+model = {
+	'pcnn_att': models.PCNN_ATT,
+	'pcnn_max': models.PCNN_MAX,
+	'pcnn_ave': models.PCNN_AVE,
+	'cnn_att' : models.CNN_ATT,
+	'cnn_ave' : models.CNN_AVE,
+	'cnn_max' : models.CNN_MAX
+}
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 param_file = open(os.path.join('data', "config"), 'r')
 param = json.loads(param_file.read())
@@ -22,7 +35,7 @@ con.set_hidden_size(230)
 con.set_window_size(3)
 con.set_pos_size(5)
 con.set_word_size(50)
-con.set_max_epoch(60)
+con.set_max_epoch(20)
 con.set_batch_size(160)
 con.set_opt_method('SGD')
 con.set_learning_rate(0.5)
@@ -36,5 +49,5 @@ con.set_is_training(False)
 con.set_use_bag(True)
 con.set_epoch_range('0,20')
 con.init()
-con.set_test_model(models.PCNN_ATT)
+con.set_test_model(model[args.model_name])
 con.test()
