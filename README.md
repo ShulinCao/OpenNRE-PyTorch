@@ -44,7 +44,7 @@ This project is under MIT license.
   ```bash
   git clone https://github.com/ShulinCao/OpenNRE-PyTorch
   ```
-3. Download NYT dataset from `https://drive.google.com/file/d/1BnyXMJ71jM0kxyJUlXa5MHf-vNjE57i-/view?usp=sharing`
+3. Download NYT dataset from [Google Drive](https://drive.google.com/file/d/1g95gbMUsGfeEmihZSb0kXPbMTuRA4lid/view?usp=sharing)
 4. Extract dataset to `./raw_data`
 ```
 unzip raw_data.zip
@@ -54,7 +54,7 @@ unzip raw_data.zip
 ### NYT10 Dataset
 
 NYT10 is a distantly supervised dataset originally released by the paper "Sebastian Riedel, Limin Yao, and Andrew McCallum. Modeling relations and their mentions without labeled text.". Here is the download [link](http://iesl.cs.umass.edu/riedel/ecml/) for the original data.
-You can download the NYT10 dataset from [Google Drive](). And the data details are as follows.
+You can download the NYT10 dataset from [Google Drive](https://drive.google.com/file/d/1g95gbMUsGfeEmihZSb0kXPbMTuRA4lid/view?usp=sharing). And the data details are as follows.
 
 ### Training Data & Testing Data
 
