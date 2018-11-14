@@ -32,8 +32,8 @@ This project is under MIT license.
 ## Requirements
 
 - Python (>=2.7)
-- PyTorch (>=0.3.1)
-	- CUDA (>=8.0) if you are using gpu
+- PyTorch (==0.3.1)
+- CUDA (>=8.0)
 - Matplotlib (>=2.0.0)
 - scikit-learn (>=0.18)
 
@@ -45,26 +45,61 @@ This project is under MIT license.
   git clone https://github.com/ShulinCao/OpenNRE-PyTorch
   ```
 3. Download NYT dataset from `https://drive.google.com/file/d/1BnyXMJ71jM0kxyJUlXa5MHf-vNjE57i-/view?usp=sharing`
-4. Extract dataset to `./origin_data`
+4. Extract dataset to `./raw_data`
 ```
-tar xvf origin_data.tar
+unzip raw_data.zip
+```
+## Dataset
+
+### NYT10 Dataset
+
+NYT10 is a distantly supervised dataset originally released by the paper "Sebastian Riedel, Limin Yao, and Andrew McCallum. Modeling relations and their mentions without labeled text.". Here is the download [link](http://iesl.cs.umass.edu/riedel/ecml/) for the original data.
+You can download the NYT10 dataset from [Google Drive](). And the data details are as follows.
+
+### Training Data & Testing Data
+
+Training data file and testing data file, containing sentences and their corresponding entity pairs and relations, should be in the following format
+
+```
+[
+    {
+        'sentence': 'Bill Gates is the founder of Microsoft .',
+        'head': {'word': 'Bill Gates', 'id': 'm.03_3d', ...(other information)},
+        'tail': {'word': 'Microsoft', 'id': 'm.07dfk', ...(other information)},
+        'relation': 'founder'
+    },
+    ...
+]
 ```
 
-## Results
+**IMPORTANT**: In the sentence part, words and punctuations should be separated by blank spaces.
 
-### PCNN-based methods
+### Word Embedding Data
 
-![pcnn precision-recall curve](https://github.com/ShulinCao/OpenNRE-PyTorch/blob/master/results/pcnn.png)
+Word embedding data is used to initialize word embedding in the networks, and should be in the following format
 
-method | auc | F1 score
----- | ---- | ----
-pcnn_att | **0.412650381932** | **0.450063211125**
-pcnn_max | 0.40546481516 | 0.441361916772
-pcnn_ave | 0.403195681149 | 0.440381148596
+```
+[
+    {'word': 'the', 'vec': [0.418, 0.24968, ...]},
+    {'word': ',', 'vec': [0.013441, 0.23682, ...]},
+    ...
+]
+```
 
-### Compare PCNN & CNN
+### Relation-ID Mapping Data
 
-![pcnn & cnn precision-recall curve](https://github.com/ShulinCao/OpenNRE-PyTorch/blob/master/results/pcnn_cnn.png)
+This file indicates corresponding IDs for relations to make sure during each training and testing period, the same ID means the same relation. Its format is as follows
+
+```
+{
+    'NA': 0,
+    'relation_1': 1,
+    'relation_2': 2,
+    ...
+}
+```
+
+**IMPORTANT**: Make sure the ID of `NA` is always 0.
 
 ## Quick Start
 
@@ -94,7 +129,7 @@ Same usage as training. When finishing testing, the best checkpoint's correspond
 python draw_plot.py PCNN_ATT
 ```
 
-The plot will be saved as `./test_result/pr_curve.png`. You could appoint several models in the arguments, like `python draw_plot.py PCNN_ATT PCNN_MAX PCNN_AVE`, as long as there are these models' results in `./test_result`.
+The plot will be saved as `./test_result/pr_curve.png`. You could appoint several models in the arguments, like `python draw_plot.py PCNN_ATT PCNN_ONE PCNN_AVE`, as long as there are these models' results in `./test_result`.
 
 ## Build Your Own Model
 
