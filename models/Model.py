@@ -10,7 +10,7 @@ from networks.selector import *
 from networks.classifier import *
 
 class Model(nn.Module):
-	def __init__(self, config):
+	def __init__(self, config):	
 		super(Model, self).__init__()
 		self.config = config
 		self.embedding = Embedding(config)
@@ -26,6 +26,3 @@ class Model(nn.Module):
 		embedding = self.embedding()
 		sen_embedding = self.encoder(embedding)
 		return self.selector.test(sen_embedding)
-
-
-

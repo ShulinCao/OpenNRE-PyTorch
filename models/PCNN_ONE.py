@@ -9,10 +9,9 @@ from networks.encoder import *
 from networks.selector import *
 from networks.classifier import *
 from .Model import Model
-class PCNN_MAX(Model):
+
+class PCNN_ONE(Model):
 	def __init__(self, config):
-		super(PCNN_MAX, self).__init__(config)
+		super(PCNN_ONE, self).__init__(config)
 		self.encoder = PCNN(config)
-		self.selector = Maximum(config, config.hidden_size * 3)
-
-
+		self.selector = One(config, config.hidden_size * 3)

@@ -9,10 +9,9 @@ from networks.encoder import *
 from networks.selector import *
 from networks.classifier import *
 from .Model import Model
-class CNN_MAX(Model):
+
+class CNN_ONE(Model):
 	def __init__(self, config):
-		super(CNN_MAX, self).__init__(config)
+		super(CNN_ONE, self).__init__(config)
 		self.encoder = CNN(config)
-		self.selector = Maximum(config, config.hidden_size)
-
-
+		self.selector = One(config, config.hidden_size)
