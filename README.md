@@ -115,7 +115,7 @@ The processed data will be stored in `./data`
 python train.py --model_name pcnn_att
 ```
 
-The arg `model_name` appoints model architecture, and `pcnn_att` is the name of one of our models. All available models are in `./model`. About other arguments please refer to `./train.py`. Once you start training, all checkpoints are stored in `./checkpoint`.
+The arg `model_name` appoints model architecture, and `pcnn_att` is the name of one of our models. All available models are in `./models`. About other arguments please refer to `./train.py`. Once you start training, all checkpoints are stored in `./checkpoint`.
 
 ### Test Model
 ```bash
